@@ -20,7 +20,6 @@ function Today() {
       .finally(()=>setIsLoading(false))
     },[url])
 
-    
   return (
     <div className="card mb-4" style={{ borderRadius: "25px" }}>
       <div className="card-body p-4">
