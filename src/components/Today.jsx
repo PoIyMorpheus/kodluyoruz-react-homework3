@@ -49,9 +49,6 @@ function Today() {
                       <p className="mb-0">
                         <strong>{time.getUTCHours()}:00</strong>
                       </p>
-                      <p className="mb-0 text-muted" style={{ fontSize: ".65rem" }}>
-                        PM
-                      </p>
                     </div>
                   )
                   })
