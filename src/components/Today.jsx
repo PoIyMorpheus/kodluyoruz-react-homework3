@@ -46,7 +46,7 @@ function Today() {
                       </p>
                       {getWeatherImageTag(initialWeather,dayTime,"64", "64")}
                       <p className="mb-0">
-                        <strong>{time.getUTCHours()}:00</strong>
+                        <strong>{time.getHours()}:00</strong>
                       </p>
                     </div>
                   )
