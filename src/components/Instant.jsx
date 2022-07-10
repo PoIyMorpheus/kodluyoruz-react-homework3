@@ -24,7 +24,7 @@ function Instant() {
   if (!isLoading) {
     let myDate = new Date("2022-07-10 00:00:00");
     myDate.setTime(weather.dt);
-    dayTime = myDate.getUTCHours() >= 18 ? "night" : "day";
+    dayTime = myDate.getHours() >= 18 ? "night" : "day";
   }
 
   return (
