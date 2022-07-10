@@ -1,0 +1,66 @@
+import React from "react";
+import { useState, useEffect } from "react";
+import { useCity } from "../context/CityContext";
+import axios from "axios";
+import { getWeatherImageTag } from "../iconManager/iconManager";
+
+function Instant() {
+  const { city } = useCity();
+
+  const api = "6e39c919e634c119b6e0d4e4857a6365";
+  let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}`;
+
+  const [weather, setWeather] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    axios(url)
+      .then((res) => setWeather(res.data))
+      .catch((e) => console.log(e))
+      .finally(() => setIsLoading(false));
+  }, [url]);
+
+  let dayTime;
+  if (!isLoading) {
+    let myDate = new Date("2022-07-10 00:00:00");
+    myDate.setTime(weather.dt);
+    dayTime = myDate.getUTCHours() >= 18 ? "night" : "day";
+  }
+
+  return (
+    <div className="card mb-4 gradient-custom" style={{ borderRadius: "25px" }}>
+      <div className="card-body p-4">
+        <div id="demo1" className="carousel slide" data-ride="carousel">
+          <ul className="carousel-indicators mb-0">
+            <li data-target="#demo1" data-slide-to="0" className="active"></li>
+            <li data-target="#demo1" data-slide-to="1"></li>
+            <li data-target="#demo1" data-slide-to="2"></li>
+          </ul>
+
+          <div className="carousel-inner">
+            <div className="carousel-item active">
+              <div className="d-flex justify-content-between mb-4 pb-2">
+                <div>
+                  <h2 className="display-2">
+                    <strong>
+                      {!isLoading &&
+                        (weather.main.temp - 272.15).toFixed(0) + "°C"}
+                      {isLoading && "Loading..."}
+                    </strong>
+                  </h2>
+                  <p className="text-muted mb-0">{city}, Turkey</p>
+                </div>
+                <div>
+                  {!isLoading && getWeatherImageTag(weather.weather[0].description, dayTime,"150","150")}
+                  {isLoading && "Loading..."}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Instant;
