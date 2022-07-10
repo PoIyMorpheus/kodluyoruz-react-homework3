@@ -10,8 +10,13 @@ function Instant() {
   const api = "6e39c919e634c119b6e0d4e4857a6365";
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}`;
 
+  let timeURL ="http://worldtimeapi.org/api/timezone/Europe/Istanbul"
+
   const [weather, setWeather] = useState({});
+  const [time, setTime] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [isTimeLoading, setIsTimeLoading] = useState(true);
+
 
   useEffect(() => {
     axios(url)
@@ -20,11 +25,18 @@ function Instant() {
       .finally(() => setIsLoading(false));
   }, [url]);
 
-  let dayTime;
-  if (!isLoading) {
-    let myDate = new Date("2022-07-10 00:00:00");
-    myDate.setTime(weather.dt);
-    dayTime = myDate.getHours() >= 18 ? "night" : "day";
+  useEffect(() => {
+    axios(timeURL)
+      .then((res) => setTime(res.data))
+      .catch((e) => console.log(e))
+      .finally(() => setIsTimeLoading(false));
+  }, []);
+
+  let dayTime = "day";
+ 
+  if(!isTimeLoading && !isLoading) {
+    let initialHour = new Date(time.datetime).getHours()
+    dayTime= (initialHour >= 18 || initialHour <= 4) ? "night" : "day";
   }
 
   return (
@@ -43,7 +55,7 @@ function Instant() {
                 <div>
                   <h2 className="display-2">
                     <strong>
-                      {!isLoading &&
+                      {(!isLoading && !isTimeLoading) &&
                         (weather.main.temp - 272.15).toFixed(0) + "°C"}
                       {isLoading && "Loading..."}
                     </strong>
