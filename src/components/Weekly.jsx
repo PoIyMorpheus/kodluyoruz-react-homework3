@@ -35,7 +35,7 @@ function Weekly() {
             <div className="carousel-item active">
               <div className="d-flex justify-content-around text-center mb-4 pb-3 pt-2">
                 {!isLoading && 
-                    weather.list.filter((x)=>new Date(x.dt_txt).getUTCHours()===12).forEach(element => {
+                    weather.list.filter((x)=>new Date(x.dt_txt).getHours()===12).forEach(element => {
                         middleOfDaysList.push(element)
                     })
                 }
