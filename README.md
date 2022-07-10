@@ -1,4 +1,6 @@
-# Website Link: https://weather-app-poiymorpheus.vercel.app/
+# Kodluyoruz React Homework 3
+
+Website Link: https://weather-app-poiymorpheus.vercel.app/
 
 # Getting Started with Create React App
 
