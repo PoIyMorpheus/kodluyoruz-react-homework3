@@ -53,7 +53,7 @@ function SearchCity() {
   return (
     <Dropdown>
       <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-        Select A City {" "}
+        Select a City {" "}
       </Dropdown.Toggle>
 
       <Dropdown.Menu  className="menu-scroll" as={CustomMenu}>
