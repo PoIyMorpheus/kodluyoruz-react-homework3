@@ -10,7 +10,7 @@ function Instant() {
   const api = "6e39c919e634c119b6e0d4e4857a6365";
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}`;
 
-  let timeURL ="http://worldtimeapi.org/api/timezone/Europe/Istanbul"
+  let timeURL ="https://worldtimeapi.org/api/timezone/Europe/Istanbul"
 
   const [weather, setWeather] = useState({});
   const [time, setTime] = useState();
